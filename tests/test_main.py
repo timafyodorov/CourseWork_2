@@ -68,4 +68,3 @@ def test_main_with_vacancies(monkeypatch, capsys):
     main.main()
     out = capsys.readouterr().out.strip().splitlines()
     assert out == [str(vac2)]
-
