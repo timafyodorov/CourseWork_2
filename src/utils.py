@@ -16,3 +16,4 @@ def filter_by_min_salary(vacancies: List[Vacancy], min_salary: int) -> List[Vaca
 def sort_by_salary(vacancies: List[Vacancy]) -> List[Vacancy]:
     """Сортировка вакансий по минимальной зарплате по убыванию"""
     return sorted(vacancies, key=lambda v: v.salary_from, reverse=True)
+

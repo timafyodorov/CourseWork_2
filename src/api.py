@@ -11,8 +11,6 @@ class BaseAPI(ABC):
 
 
 class HeadHunterAPI(BaseAPI):
-    """Класс для работы с API HeadHunter-a"""
-
     BASE_URL = "https://api.hh.ru/vacancies"
 
     def get_vacancies(self, keyword: str, per_page: int = 20) -> List[Dict[str, Any]]:
@@ -41,3 +39,4 @@ class HeadHunterAPI(BaseAPI):
             "currency": salary.get("currency"),
             "url": item.get("alternate_url", ""),
         }
+

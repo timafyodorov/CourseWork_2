@@ -69,3 +69,5 @@ class Vacancy:
             "currency": self.currency,
             "url": self.url,
         }
+
+

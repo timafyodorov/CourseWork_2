@@ -7,6 +7,7 @@ from src.api import HeadHunterAPI
 from src.vacancy import Vacancy
 
 
+
 @pytest.fixture(autouse=True)
 def patch_saver(monkeypatch):
     class DummySaver:
@@ -67,3 +68,4 @@ def test_main_with_vacancies(monkeypatch, capsys):
     main.main()
     out = capsys.readouterr().out.strip().splitlines()
     assert out == [str(vac2)]
+

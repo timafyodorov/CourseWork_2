@@ -8,3 +8,4 @@ pytest -q
 python3 -m pytest -q
 
 4)Статический анализ кода: flake8, src, tests
+

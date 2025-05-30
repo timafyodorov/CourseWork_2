@@ -61,6 +61,7 @@ class JSONSaver(VacancySaver):
         ]
 
     def delete_all(self) -> None:
-        """Очищает файл и удаляет все вакансии."""
+        """Очищает файл и удаляет все вакансии"""
         with open(self.__filename, "w", encoding="utf-8") as f:
             json.dump([], f)
+
