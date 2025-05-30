@@ -85,3 +85,4 @@ def test_get_vacancies_network_error(monkeypatch):
     api = HeadHunterAPI()
     assert api.get_vacancies("x") == []
 
+

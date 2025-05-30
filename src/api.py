@@ -40,3 +40,4 @@ class HeadHunterAPI(BaseAPI):
             "url": item.get("alternate_url", ""),
         }
 
+

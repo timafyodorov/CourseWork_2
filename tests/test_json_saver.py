@@ -26,3 +26,4 @@ def test_save_and_load_and_delete(tmp_path):
     assert len(loaded) == 1
     assert loaded[0].title == vacancy.title
 
+

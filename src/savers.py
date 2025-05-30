@@ -65,3 +65,4 @@ class JSONSaver(VacancySaver):
         with open(self.__filename, "w", encoding="utf-8") as f:
             json.dump([], f)
 
+
