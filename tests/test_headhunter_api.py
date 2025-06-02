@@ -1,6 +1,5 @@
-import pytest
 import requests
-
+import pytest
 from src.api import HeadHunterAPI
 from src.vacancy import Vacancy
 
@@ -25,36 +24,36 @@ def dummy_get(url, params=None):
         "name": "TestVac",
         "employer": {"name": "TestCo"},
         "salary": {"from": 100, "to": 200, "currency": "USD"},
-        "alternate_url": "http://test",
+        "alternate_url": "http://test"
     }
     return DummyResponse(status_code=200, json_data={"items": [item]})
 
 
 @pytest.fixture
 def mock_response(requests_mock):
+    """Фикстура для мока ответа API"""
     mock_data = {
-        "items": [
-            {
-                "name": "Python Developer",
-                "url": "http://test.com",
-                "salary": {"from": 100000, "to": 150000},
-                "snippet": {"requirement": "Test description"},
-            }
-        ]
+        "items": [{
+            "name": "Python Developer",
+            "url": "http://test.com",
+            "salary": {
+                "from": 100000,
+                "to": 150000
+            },
+            "snippet": {"requirement": "Test description"}
+        }]
     }
     requests_mock.get("https://api.hh.ru/vacancies", json=mock_data)
     return mock_data
 
 
 def test_get_vacancies_success(requests_mock):
-    items = [
-        {
-            "name": "TestVac",
-            "employer": {"name": "TestCo"},
-            "salary": {"from": 100, "to": 200, "currency": "USD"},
-            "alternate_url": "http://test",
-        }
-    ]
+    items = [{
+        "name": "TestVac",
+        "employer": {"name": "TestCo"},
+        "salary": {"from": 100, "to": 200, "currency": "USD"},
+        "alternate_url": "http://test"
+    }]
     requests_mock.get(HeadHunterAPI.BASE_URL, json={"items": items})
     api = HeadHunterAPI()
     result = api.get_vacancies("python", per_page=1)
@@ -76,13 +75,9 @@ def test_get_vacancies_http_error(requests_mock):
 
 
 def test_get_vacancies_network_error(monkeypatch):
-    """При сетевой ошибке возвращает пустой список"""
-
     def fail(*args, **kwargs):
         raise requests.RequestException("network fail")
 
     monkeypatch.setattr(requests, "get", fail)
     api = HeadHunterAPI()
     assert api.get_vacancies("x") == []
-
-

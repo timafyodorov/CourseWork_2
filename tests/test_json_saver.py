@@ -1,5 +1,4 @@
 import pytest
-
 from src.savers import JSONSaver
 from src.vacancy import Vacancy
 
@@ -10,7 +9,6 @@ def tmp_file(tmp_path):
 
 
 def test_save_and_load_and_delete(tmp_path):
-    """Тест для загрузки и сохранения вакансий"""
     file_path = tmp_path / "test.json"
     saver = JSONSaver(str(file_path))
     vacancy = Vacancy(
@@ -19,11 +17,9 @@ def test_save_and_load_and_delete(tmp_path):
         url="http://test.com",
         salary_from=100000,
         salary_to=150000,
-        currency="RUR",
+        currency="RUR"
     )
     saver.save_vacancies([vacancy])
     loaded = saver.load_vacancies()
     assert len(loaded) == 1
     assert loaded[0].title == vacancy.title
-
-

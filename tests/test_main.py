@@ -1,27 +1,20 @@
 import builtins
-
 import pytest
-
 import main
-from src.api import HeadHunterAPI
 from src.vacancy import Vacancy
-
+from src.api import HeadHunterAPI
 
 
 @pytest.fixture(autouse=True)
 def patch_saver(monkeypatch):
     class DummySaver:
-        def __init__(self, *args, **kwargs):
-            pass
-
-        def save_vacancies(self, vacs):
-            pass
-
+        def __init__(self, *args, **kwargs): pass
+        def save_vacancies(self, vacs): pass
     monkeypatch.setattr(main, "JSONSaver", DummySaver)
 
 
 def test_main_no_vacancies(monkeypatch, capsys):
-    """Если API НЕ вернул, то main ничего не печатает"""
+    """Если API вернул пусто, main ничего не печатает"""
     inputs = iter(["", "5", "0", "3"])
     monkeypatch.setattr(
         builtins,
@@ -44,7 +37,7 @@ def test_main_with_vacancies(monkeypatch, capsys):
         url="http://test.com",
         salary_from=100,
         salary_to=None,
-        currency="RUR",
+        currency="RUR"
     )
     vac2 = Vacancy(
         title="High",
@@ -52,7 +45,7 @@ def test_main_with_vacancies(monkeypatch, capsys):
         url="http://test.com",
         salary_from=200,
         salary_to=None,
-        currency="RUR",
+        currency="RUR"
     )
     inputs = iter(["", "2", "150", "2"])
     monkeypatch.setattr(
@@ -68,4 +61,3 @@ def test_main_with_vacancies(monkeypatch, capsys):
     main.main()
     out = capsys.readouterr().out.strip().splitlines()
     assert out == [str(vac2)]
-
