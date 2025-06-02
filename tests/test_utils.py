@@ -11,7 +11,7 @@ def mk(
     currency: Optional[str],
     url: str
 ) -> Vacancy:
-    """Хелпер для создания Vacancy."""
+    """Хелпер для создания Vacancy"""
     return Vacancy(
         title=title,
         company=company,
@@ -23,7 +23,7 @@ def mk(
 
 
 def test_filter_by_keyword():
-    """Фильтрация по ключевому слову."""
+    """Фильтрация по ключевому слову"""
     v1 = mk("Engineer", "TechCorp", 100, 150, "USD", "u1")
     v2 = mk("Manager", "BizCorp", 200, 250, "USD", "u2")
     res = filter_by_keyword([v1, v2], "engine")
@@ -31,7 +31,7 @@ def test_filter_by_keyword():
 
 
 def test_filter_by_min_salary():
-    """Фильтрация по минимальной зарплате."""
+    """Фильтрация по минимальной зарплате"""
     v1 = mk("Dev", "A", 50, None, None, "u1")
     v2 = mk("Dev2", "B", 150, None, None, "u2")
     res = filter_by_min_salary([v1, v2], 100)
@@ -39,7 +39,6 @@ def test_filter_by_min_salary():
 
 
 def test_sort_by_salary():
-    """Сортировка вакансий по зарплате (убывание)."""
     v1 = mk("Low", "A", 50, None, None, "u1")
     v2 = mk("High", "B", 150, None, None, "u2")
     res = sort_by_salary([v1, v2])

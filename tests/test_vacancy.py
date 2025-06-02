@@ -18,5 +18,3 @@ def test_comparison():
     assert v1 < v2
     assert v2 > v1
     assert v1 != v2
-
-

@@ -18,3 +18,4 @@ def sort_by_salary(vacancies: List[Vacancy]) -> List[Vacancy]:
     return sorted(vacancies, key=lambda v: v.salary_from, reverse=True)
 
 
+
