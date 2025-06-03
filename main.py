@@ -1,10 +1,11 @@
 from src.api import HeadHunterAPI
 from src.savers import JSONSaver
 from src.utils import filter_by_keyword, filter_by_min_salary, sort_by_salary
+from src.vacancy import Vacancy  # Импорт класса Vacancy
 
 
 def main() -> None:
-    """Сбор, фильтрация и вывод вакансии по заданным критериям"""
+    """Сбор, фильтрация и вывод вакансий по заданным критериям"""
     api = HeadHunterAPI()
     saver = JSONSaver()
 
@@ -13,7 +14,21 @@ def main() -> None:
     min_salary = int(input("💰 Минимальная зарплата: "))
     top_n = int(input("🏆 Сколько топ-вакансий показать: "))
 
-    vacancies = api.get_vacancies(query, per_page=per_page)
+    vacancies_dicts = api.get_vacancies(query, per_page=per_page)
+
+    vacancies = [
+        Vacancy(
+            title=item["title"],
+            company=item["company"],
+            description=item.get("description", ""),
+            salary=item.get(
+                "salary"
+            ),  # подставьте, если нужно собрать salary из отдельных полей
+            url=item["url"],
+        )
+        for item in vacancies_dicts
+    ]
+
     saver.save_vacancies(vacancies)
 
     filtered_kw = filter_by_keyword(vacancies, query)

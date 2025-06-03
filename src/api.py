@@ -14,9 +14,9 @@ class HeadHunterAPI(BaseAPI):
     BASE_URL = "https://api.hh.ru/vacancies"
 
     def get_vacancies(self, keyword: str, per_page: int = 20) -> List[Dict[str, Any]]:
-        params = {"text": keyword}
+        params: Dict[str, str] = {"text": keyword}
         if per_page is not None:
-            params["per_page"] = per_page
+            params["per_page"] = str(per_page)
 
         try:
             resp = requests.get(self.BASE_URL, params=params)
@@ -29,7 +29,6 @@ class HeadHunterAPI(BaseAPI):
 
     @staticmethod
     def _parse(item: dict) -> Dict[str, Any]:
-        """Преобразование dict в объект Vacancy"""
         salary = item.get("salary") or {}
         return {
             "title": item.get("name", ""),
@@ -39,5 +38,3 @@ class HeadHunterAPI(BaseAPI):
             "currency": salary.get("currency"),
             "url": item.get("alternate_url", ""),
         }
-
-
