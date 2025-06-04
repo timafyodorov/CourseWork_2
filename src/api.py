@@ -33,8 +33,8 @@ class HeadHunterAPI(BaseAPI):
         return {
             "title": item.get("name", ""),
             "company": item.get("employer", {}).get("name", ""),
-            "salary_from": salary.get("from"),
-            "salary_to": salary.get("to"),
+            "from": salary.get("from"),
+            "to": salary.get("to"),
             "currency": salary.get("currency"),
             "url": item.get("alternate_url", ""),
         }

@@ -26,7 +26,7 @@ class Vacancy:
         self.employment = employment
 
         self.salary_from, self.salary_to, self.currency = self.__process_salary(salary)
-        self.salary = self.salary_from  # для сравнения (__lt__, __gt__, __eq__)
+        self.salary = self.salary_from
 
     def __validate_title(self, title: str) -> str:
         if not title.strip():
@@ -38,11 +38,11 @@ class Vacancy:
             raise ValueError("Некорректный URL")
         return url
 
-    def __validate_description(self, description: str) -> str:
+    def __validate_description(self, description: str) -> None:
         if not description.strip():
-            raise ValueError("Пустое описание вакансии")
-        return description
-
+            self.description = "Описание не указано"
+        else:
+            self.description = description
     def __process_salary(self, salary: Optional[Dict]) -> tuple[int, int, str]:
         if not salary:
             return 0, 0, "RUB"

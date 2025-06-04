@@ -1,7 +1,7 @@
 from src.api import HeadHunterAPI
 from src.savers import JSONSaver
 from src.utils import filter_by_keyword, filter_by_min_salary, sort_by_salary
-from src.vacancy import Vacancy  # Импорт класса Vacancy
+from src.vacancy import Vacancy
 
 
 def main() -> None:
@@ -21,9 +21,7 @@ def main() -> None:
             title=item["title"],
             company=item["company"],
             description=item.get("description", ""),
-            salary=item.get(
-                "salary"
-            ),  # подставьте, если нужно собрать salary из отдельных полей
+            salary={"from": item.get("from"), "to": item.get("to")},
             url=item["url"],
         )
         for item in vacancies_dicts
