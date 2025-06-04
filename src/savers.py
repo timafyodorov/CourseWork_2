@@ -52,9 +52,12 @@ class JSONSaver(VacancySaver):
             Vacancy(
                 title=item["title"],
                 company=item["company"],
-                salary_from=item.get("salary_from"),
-                salary_to=item.get("salary_to"),
-                currency=item.get("currency"),
+                description=item.get("description", ""),  # добавляем описание
+                salary={
+                    "from": item.get("salary_from"),
+                    "to": item.get("salary_to"),
+                    "currency": item.get("currency"),
+                },
                 url=item["url"],
             )
             for item in data
@@ -64,4 +67,3 @@ class JSONSaver(VacancySaver):
         """Очищает файл и удаляет все вакансии"""
         with open(self.__filename, "w", encoding="utf-8") as f:
             json.dump([], f)
-
